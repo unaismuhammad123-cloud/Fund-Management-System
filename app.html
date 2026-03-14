@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fund Management System</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo"> Welfare Fund Management System</div>
+  <button type ="button" class="hamburger" onclick="toggleSidebar()">☰</button>
+</header>
+
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <h2> Fund Management Dashboard</h2>
+    <button type ="button" onclick="showSection('donationSection')">Donations</button>
+    <button type ="button" onclick="showSection('expenseSection')">Expenses</button>
+    <button type ="button" onclick="showSection('recordSection')">Records</button>
+    <button type ="button" onclick="showSection('reportSection')">Reports</button>
+    <button type ="button" onclick="logout()" class="logout-btn">Logout</button>
+  </aside>
+
+  <!-- Main content -->
+  <div class="main">
+
+    <!-- Donation Section -->
+    <div id="donationSection" class="section">
+      <h2>Add Donation</h2>
+      <input id="donorName" type="text" placeholder="Donor Name">
+      <input id="fatherName" type="text" placeholder="Father Name">
+      <input id="donorMobile" type="number" placeholder="Mobile Number">
+      <select id="donationMonth" title="Select Donation Month">
+        <option value="">Select Month</option>
+        <option>January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+      </select>
+      <input id="donationAmount" type="number" placeholder="Donation Amount">
+      <button type="button" onclick="addDonation()">Add Donation</button>
+    </div>
+
+    <!-- Expense Section -->
+    <div id="expenseSection" class="section hidden">
+      <h2>Add Expense</h2>
+      <input id="expenseName" type="text" placeholder="Name">
+      <input id="expenseFather" type="text" placeholder="Father Name">
+      <input id="expensePurpose" type="text" placeholder="Purpose">
+      <input id="expenseMobile" type="number" placeholder="Mobile Number">
+      <select id="expenseMonth" title="Select Expense Month">
+        <option value="">Select Month</option>
+        <option>January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+      </select>
+      <input id="expenseAmount" type="number" placeholder="Expense Amount">
+      <button type="button" onclick="addExpense()">Add Expense</button>
+    </div>
+
+    <!-- Record Section -->
+<div id="recordSection" class="section hidden">
+  <h2>All Records</h2>
+
+  <!-- Toggle between Monthly and Yearly -->
+  <div class="record-toggle">
+    <label>
+      <input type="radio" name="recordView" value="monthly" checked onchange="toggleRecordView(this.value)"> Monthly
+    </label>
+    <label>
+      <input type="radio" name="recordView" value="yearly" onchange="toggleRecordView(this.value)"> Yearly
+    </label>
+  </div>
+
+  <!-- Monthly filter -->
+  <div id="monthlyFilter">
+    <label for="recordMonth">Select Month:</label>
+    <select id="recordMonth" onchange="filterRecords()">
+      <option value="">All Months</option>
+      <option value="Janurary">January</option>
+      <option value="Feburary">February</option>
+      <option value="March">March</option>
+      <option value="April">April</option>
+      <option value="May">May</option>
+      <option value="June">June</option>
+      <option value="July">July</option>
+      <option value="August">August</option>
+      <option value="September">September</option>
+      <option value="October">October</option>
+      <option value="November">November</option>
+      <option value="December">December</option>
+    </select>
+  </div>
+
+  <!-- Yearly filter -->
+  <div id="yearlyFilter" class="record-filter hidden">
+    <label for="recordYear">Select Year:</label>
+    <select id="recordYear" onchange="filterRecords()">
+      <option value="">All Years</option>
+      <option value="2025">2025</option>
+      <option value="2026">2026</option>
+      <option value="2027">2027</option>
+      <option value="2028">2028</option>
+      <option value="2029">2029</option>
+      <option value="2030">2030</option>
+      <option value="2031">2031</option>
+      <option value="2032">2032</option>
+      <option value="2033">2033</option>
+      <option value="2034">2034</option>
+      <option value="2035">2035</option>
+    </select>
+  </div>
+
+  <!-- Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Father Name</th>
+        <th>Mobile</th>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Amount</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="recordTable"></tbody>
+  </table>
+</div>
+
+    <!-- Report Section -->
+    <div id="reportSection" class="section hidden">
+      <select id="reportMonth" title="Select Report Month" onchange="monthReport()">
+        <option value="">All months</option>
+        <option>Janurary</option>
+        <option>Feburary</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+      </select>
+
+      <h2>Dashboard Report</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Total Donation</h3>
+          <p id="totalDonation">0</p>
+        </div>
+        <div class="card">
+          <h3>Total Expense</h3>
+          <p id="totalExp">0</p>
+        </div>
+        <div class="card">
+          <h3>Balance</h3>
+          <p id="balance">0</p>
+        </div>
+        <button type="button" onclick="exportExcel()">Export Excel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

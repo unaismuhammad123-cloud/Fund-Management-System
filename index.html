@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Fund Management App</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+   <div class="container">
+      <header>Welfare
+         <br>Fund
+         <br>Management
+         <br> System
+      </header>
+
+      <!-- Login Card-->
+      <div class="login-card">
+
+         <h2>Login</h2>
+         <input type="text" id="loginEmail" placeholder="Email">
+         <input type="password" id="loginPassword" placeholder="Password">
+         <button type="button" onclick="login()">Login</button>
+         <p> Don't have an account?
+            <a href="#" onclick="showSignup()">Sign Up</a>
+         </p>
+      </div>
+
+      <!-- Signup Card-->
+      <div class="signup-card hidden">
+         <h2> Sign Up</h2>
+         <input type="text" id="SignupUsername" placeholder="Username">
+         <input type="text" id="SignupEmail" placeholder="Email">
+         <input type="password" id="SignupPassword" placeholder="Create password">
+         <input type="password" id="SignupConfirm" placeholder="Confirm Passowd">
+         <button type="button" onclick="signup()">Sign Up</button>
+         <p>
+            Already have an account?
+            <a href="#" onclick="showLogin()">Login</a>
+         </p>
+      </div>
+   </div>
+
+      <footer>Developed By M.Unais Ghanjera</footer>
+
+
+   <script src="script.js"></script>
+</body>
+
+</html>
